@@ -2,11 +2,10 @@ import { Component, Input, Output, EventEmitter, NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-job-card',
-  templateUrl: './job-card-component.html',
-  styleUrl: './job-card-component.css',
-  standalone: true,
-  imports: [CommonModule]  // Import CommonModule here
+    selector: 'app-job-card',
+    templateUrl: './job-card-component.html',
+    styleUrl: './job-card-component.css',
+    imports: [CommonModule] // Import CommonModule here
 })
 export class JobCardComponent {
   @Input() job: { id: string; status: string } = { id: '', status: '' };
