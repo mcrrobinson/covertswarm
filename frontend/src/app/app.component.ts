@@ -12,11 +12,10 @@ import { JobCardComponent } from './job-card-component';
 
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule, MatDialogModule, JobCardComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [RouterOutlet, FormsModule, CommonModule, MatDialogModule, JobCardComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   baseURL: string = '/api';

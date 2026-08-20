@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventSourceService {
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private eventSource: EventSource | null = null;
   private messageSubject = new Subject<MessageEvent>();
   private openSubject = new Subject<Event>();
@@ -17,6 +19,10 @@ export class EventSourceService {
   constructor() {}
 
   public connect(url: string): void {
+    // EventSource is a browser-only API; skip during SSR/build-time route extraction.
+    if (!this.isBrowser) {
+      return;
+    }
     this.eventSource = new EventSource(url);
     this.eventSource.addEventListener('message', (event) => this.messageSubject.next(event));
     this.eventSource.addEventListener('open', (event) => this.openSubject.next(event));
